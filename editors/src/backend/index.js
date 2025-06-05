@@ -3,12 +3,11 @@ const mysql=require('mysql2');
 const cors=require('cors');
 const multer=require('multer')
 const { use } = require('react');
+const path = require('path');
 const app=express();
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(cors());
 app.use(express.json());
-app.listen(3000,()=>{
-    console.log("port is running on 3000")
-});
 
 const upload = multer({ 
   limits: { fileSize: 50 * 1024 * 1024 }, 
@@ -31,6 +30,9 @@ db.connect((err)=>{
         console.log("database connected")
     }
 })
+app.listen(3000,()=>{
+    console.log("port is running on 3000")
+});
 app.post('/admin/login',(req,res)=>{
     let {username,password}=req.body;
     if (username==="tanuj"){
@@ -89,31 +91,31 @@ app.post('/user/login',(req,res)=>{
         }
     });
 })
-app.post('/addneweditor',upload.single('image'),(req,res)=>{
-    let{name,email,phone,dob,type,extra}=req.body;
-    const image = req.file?req.file.filename:null;
-    db.query(`SELECT EXISTS(SELECT * FROM editors WHERE email=?) as exist`,[email],(err,result)=>{
-        if(err){
-            console.error(err)
-            return res.status(500).json({success:false ,message:"error while fetching data"})
-        }
-        let userexist=result[0].exist===1
-        if(userexist){
-            return res.status(409).json({success:false ,message:"editor already exists"})
-        }
-        else{
-            db.query(`INSERT INTO editors(name,email,phone,dob,image,type,extra) VALUES(?,?,?,?,?,?,?)`,[name,email,phone,dob,image,type,extra],(err,result)=>{
-                if(err){
-                    console.error(err)
-                    return res.status(500).json({success:false,message:'error while inserting'})
-                }
-                else{
-                    return res.status(201).json({success:true,message:'inserted succesfully'})
-                }
-            })
-        }
+    app.post('/addneweditor',upload.single('image'),(req,res)=>{
+        let{name,email,phone,dob,type,extra}=req.body;
+        const image = req.file?req.file.filename:null;
+        db.query(`SELECT EXISTS(SELECT * FROM editors WHERE email=?) as exist`,[email],(err,result)=>{
+            if(err){
+                console.error(err)
+                return res.status(500).json({success:false ,message:"error while fetching data"})
+            }
+            let userexist=result[0].exist===1
+            if(userexist){
+                return res.status(409).json({success:false ,message:"editor already exists"})
+            }
+            else{
+                db.query(`INSERT INTO editors(name,email,phone,dob,image,type,extra) VALUES(?,?,?,?,?,?,?)`,[name,email,phone,dob,image,type,extra],(err,result)=>{
+                    if(err){
+                        console.error(err)
+                        return res.status(500).json({success:false,message:'error while inserting'})
+                    }
+                    else{
+                        return res.status(201).json({success:true,message:'inserted succesfully'})
+                    }
+                })
+            }
+        })
     })
-})
 app.get('/alleditors', (req, res) => {
     db.query(`SELECT * FROM editors`, (err, result) => {
       if (err) {

@@ -30,7 +30,7 @@ function Editors() {
         {editors.length > 0 ? (
           editors.map((editor, index) => (
             <div className="editor-card" key={index}>
-              <div id='img1'><img src={ph} alt={editor.name} /></div>
+              <div id='img1'><img src={`http://localhost:3000/uploads/${editor.image}`} alt={editor.name} /></div>
               <hr className="editor-divider" />
 
               <div id='details'>
