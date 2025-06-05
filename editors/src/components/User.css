@@ -1,0 +1,32 @@
+#main2{
+    background-color:rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;   
+}
+#main{
+    display: flex;
+    gap: 30px;  
+    background-color:rgba(0,0,0,0.5);
+    width: 1000px;
+    height:400px;
+    border:1px solid rgb(233, 220, 220);
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 1px 3px white;
+    
+}
+button{
+    width: 150px;
+    height: 50px;
+}
+button:hover{
+    box-shadow: 1px 1px 6px white;
+    
+}
+h1{
+font-weight: bold;
+text-transform:capitalize;}
