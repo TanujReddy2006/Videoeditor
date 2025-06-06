@@ -12,6 +12,7 @@ import Types from './components/Types'
 import Editors from './components/Editors'
 import Addneweditor from './components/Addneweditor'
 import Profile from './components/Profile'
+import Topeditors from './components/Topeditors'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -23,7 +24,7 @@ function App() {
       <Route path='/Adminlogin' element={<Adminlogin/>}/>
       <Route path='/Userlogin' element={<Userlogin/>}/>
       <Route path='/Usersignup' element={<Usersignup/>}/>
-      <Route path='/Home' element={<><Nav/><Start/><Types/></>}/>
+      <Route path='/Home' element={<><Nav/><Start/><Types/><Topeditors/><Editors/></>}/>
       <Route path='/Admin/Home' element={<Nav/>}/>
       <Route path='/alleditors' element={<><Nav/><Editors/></>}/>
       <Route path='/aboutus' element={<Nav/>}/>

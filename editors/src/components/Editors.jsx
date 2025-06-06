@@ -6,6 +6,16 @@ import ph from './ph1editor3.jpg'
 function Editors() {
   const [editors, setEditors] = useState([]);
 
+  function isadmin(){
+      const admin=localStorage.getItem('userid');
+      if(admin==='admin'){
+        return true;
+      }
+      else{
+        return false;
+      }
+  }
+
   useEffect(() => {
     const fetchEditors = async () => {
       try {
@@ -25,27 +35,28 @@ function Editors() {
   }, []);
 
   return (
-    <div id="alleditors">
-      <div id="all">
-        {editors.length > 0 ? (
-          editors.map((editor, index) => (
-            <div className="editor-card" key={index}>
-              <div id='img1'><img src={`http://localhost:3000/uploads/${editor.image}`} alt={editor.name} /></div>
-              <hr className="editor-divider" />
-
-              <div id='details'>
-                <p>{editor.name}</p>
-                <p>{editor.type} Editor</p>
+    <div id='alleditors2'>
+      <div id="alleditors">
+        <div id="all">
+          {editors.length > 0 ? (
+            editors.map((editor, index) => (
+              <div className="editor-card" key={index}>
+                <div id='img1'><img src={`http://localhost:3000/uploads/${editor.image}`} alt={editor.name} /></div>
+                <hr className="editor-divider" />
+                <div id='details'>
+                  <p>{editor.name}</p>
+                  <p>{editor.type} Editor</p>
+                </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <p>No editors found</p>
-        )}
-      </div>
-
-      <div id="addneweditor" onClick={() => window.location.href = '/alleditors/addnew'}>
-        <h3>+Add</h3>
+            ))
+          ) : (
+            <p>No editors found</p>
+          )}
+        </div>
+        <div id="addneweditor" onClick={() => window.location.href = '/alleditors/addnew'}>
+          { isadmin()?<h1>+Add</h1>:<></>
+          }
+        </div>
       </div>
     </div>
   );

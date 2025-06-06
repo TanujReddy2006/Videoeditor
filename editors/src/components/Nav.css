@@ -37,3 +37,19 @@ body{
   color: black;
   font-weight: 600;
 }
+.nav-right button {
+  margin-left: 20px;
+  margin-right: 20px;
+  text-decoration: none;
+  color: black;
+  border:1px solid black;
+  border-radius: 20px;
+  background-color: white;
+  font-size: medium;
+}
+.nav-right button:hover{
+  background-color: rgba(48, 49, 95, 0.582);
+  color: #ffffff;
+  box-shadow: 0px 1px 9px rgba(0, 0, 0, 0.3);
+  cursor: pointer;  
+}

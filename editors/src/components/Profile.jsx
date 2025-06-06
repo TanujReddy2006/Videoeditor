@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import pr from './pr.jpg'
 import './Profile.css'
 function Profile() {
+  const editing=false
   const [data,Setdata]=useState({
     name:'',
     email:'',
@@ -54,8 +55,13 @@ function Profile() {
                         <input type="loc" name="loc" id="loc" value={data.loc}  onChange={handleChange}/>
                     </div>
                       <div id='butts'>
-                        <button type='reset'>Edit </button>
-                        <button type='submit'>Save</button>
+                        {
+                        editing?<button type='submit'>Save</button>:<button type='reset'>Edit</button>
+                        }
+                        <button type='button' onClick={()=>{
+                          localStorage.removeItem('userid')
+                          window.location.href='/home'
+                        }}>Logout</button>
                       </div>
 
                 </form>

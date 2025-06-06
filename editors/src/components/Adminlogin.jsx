@@ -17,6 +17,8 @@ function Adminlogin() {
       .then((data) => {
         if (data.success) {
           alert('Logged in as Admin');
+          localStorage.setItem('userid','admin')
+          window.location.href='/home'
         } else {
           alert(data.message || 'Login failed');
         }

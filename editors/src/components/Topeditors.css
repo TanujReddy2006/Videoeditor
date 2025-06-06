@@ -1,0 +1,18 @@
+#editors-head {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 10px;
+}
+
+#editors-head h1 {
+  font-size: 3.5rem;              /* Responsive large size */
+  color: #0B2545;                 /* Deep blue for contrast */
+  font-weight: 800;              /* Bold for visibility */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  letter-spacing: 1px;           /* Better spacing */
+  background: linear-gradient(90deg, #0B2545, #1B3C59); /* Optional gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
