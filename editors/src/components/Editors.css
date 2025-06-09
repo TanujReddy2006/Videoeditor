@@ -10,17 +10,15 @@
     align-items: center;
     margin-top: 20px;
     gap: 30px;
-    margin-left: 80px;
+    margin-left: 20px;
     margin-right: 20px;
 }
 #all {
     display: flex;
-    flex-wrap: wrap; /* Ensures proper wrapping on small screens */
+    flex-wrap: wrap;
     justify-content:baseline;
     gap: 25px;
 }
-
-/* Editor card styling */
 .editor-card {
     background: #ffffff;
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
@@ -100,16 +98,43 @@
     background: #2a4c7b;
     transform: translateY(-5px) scale(1.05);
 }
+#box1{
+    display: flex;
+}
+#box2 li {
+  list-style-type: none;
+  font-size: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  color: #1d3557;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+}
+
+#box2 li:hover{
+    background-color: #a7c5f13a;
+    cursor: pointer;
+    box-shadow: 0px 1px 9px rgba(0, 0, 0, 0.105);
+}
+#box2{
+display: flex;
+flex-direction: column;
+    min-width:200px;
+    width: 20%;
+    background-color: #ffffff;
+height: 100vh;
+}
 
 @media (max-width: 768px) {
     #all {
-        flex-direction: column; /* Stack items vertically */
+        flex-direction: column; 
         align-items: center;
         gap: 30px;
     }
 
     .editor-card {
-        width: 80%; /* Make cards more readable */
+        width: 80%; 
     }
 
     #addneweditor {
@@ -117,4 +142,15 @@
         padding: 12px 35px;
         border-radius: 40px;
     }
+    #box1{
+        flex-direction: column;
+    }
+    #box2{
+        height: auto;
+        width: 100vh;
+    }
+    #box2 ul{
+        width: 100vh;
+    }
 }
+

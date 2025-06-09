@@ -3,7 +3,7 @@ import './Editors.css';
 import pr from './pr.jpg';
 import ph from './ph1editor3.jpg'
 
-function Editors() {
+function VideoEditor() {
   const [editors, setEditors] = useState([]);
 
   function isadmin(){
@@ -19,7 +19,7 @@ function Editors() {
   useEffect(() => {
     const fetchEditors = async () => {
       try {
-        const res = await fetch('http://localhost:3000/alleditors');
+        const res = await fetch('http://localhost:3000/videoeditors');
         const data = await res.json();
         if (data.success) {
           setEditors(data.editors);
@@ -73,4 +73,4 @@ function Editors() {
   );
 }
 
-export default Editors;
+export default VideoEditor;

@@ -137,3 +137,44 @@ app.get('/alleditors', (req, res) => {
         }
     })
   })
+  app.get('/photoeditors', (req, res) => {
+    db.query(`SELECT * FROM editors where type='photo'`, (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(200).json({ success: false, message: 'Error fetching editors' });
+      } else {
+        res.status(200).json({ success: true, editors: result });
+      }
+    });
+  });
+    app.get('/videoeditors', (req, res) => {
+    db.query(`SELECT * FROM editors where type='video'`, (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(200).json({ success: false, message: 'Error fetching editors' });
+      } else {
+        res.status(200).json({ success: true, editors: result });
+      }
+    });
+  });
+      app.get('/shortseditors', (req, res) => {
+    db.query(`SELECT * FROM editors where type='shorts'`, (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(200).json({ success: false, message: 'Error fetching editors' });
+      } else {
+        res.status(200).json({ success: true, editors: result });
+      }
+    });
+  });
+      app.get('/thumbnaileditors', (req, res) => {
+    db.query(`SELECT * FROM editors where type='thumbnail'`, (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(200).json({ success: false, message: 'Error fetching editors' });
+      } else {
+        res.status(200).json({ success: true, editors: result });
+      }
+    });
+  });
+  
