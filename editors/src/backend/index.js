@@ -191,3 +191,15 @@ app.get('/alleditors', (req, res) => {
       }
     })
   })
+  app.get('/editor/:id',(req,res)=>{
+    const id=req.params.id
+    db.query(`SELECT * FROM editors WHERE id=?`,[id],(err,result)=>{
+      if(err){
+        console.error(err)
+        res.status(500).json({success:false,message:'database error'})
+      }
+      else{
+        res.status(200).json({success:true,result:result})
+      }
+    })
+  })

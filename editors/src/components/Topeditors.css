@@ -16,3 +16,8 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+#kkk{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

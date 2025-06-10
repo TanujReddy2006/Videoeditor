@@ -18,6 +18,7 @@ import VideoEditor from './components/VideoEditor';
 import ShortsEditors from './components/ShortsEditors'
 import ThumbnailEditors from './components/ThumbnailEditors'
 import About from './components/About'
+import Singleeditor from './components/Singleeditor'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -40,6 +41,7 @@ function App() {
       <Route path='/aboutus' element={<><Nav/><About/></>}/>
       <Route path='/profile' element={<><Nav/> <Profile/></>}/>
       <Route path='/alleditors/addnew' element={<><Nav/><Addneweditor/></>}/>
+      <Route path='/editor/:id' element={<><Nav/><Singleeditor/></>}/>
     </Routes>
     </BrowserRouter>
     </>

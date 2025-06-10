@@ -1,0 +1,83 @@
+.editor-details-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.editor-profile-card {
+    text-transform: capitalize;
+  max-width: 600px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.editor-image-section {
+  text-align: center;
+  background-color: #222438;
+  padding: 20px;
+
+
+}
+
+.editor-image {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ccc;
+}
+
+.editor-info-section {
+  padding: 20px;
+  text-transform: capitalize;
+  gap: 10px;
+}
+
+.editor-name {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.editor-type,
+.editor-dob,
+.editor-extra,
+.editor-contact p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #555;
+  text-transform: capitalize;
+}
+
+.editor-contact {
+  margin-top: 20px;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.loading-message {
+  font-size: 18px;
+  text-align: center;
+  margin-top: 50px;
+}
+.contact-editor-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #052842;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.contact-editor-button:hover {
+  background-color: #005fa3;
+}
