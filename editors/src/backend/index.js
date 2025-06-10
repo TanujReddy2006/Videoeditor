@@ -177,4 +177,17 @@ app.get('/alleditors', (req, res) => {
       }
     });
   });
-  
+  app.post('/profileupdate',(req,res)=>{
+    console.log(req.body)
+    const prname=req.body.username
+    const userid=req.body.userid
+    db.query(`UPDATE userlogin SET username=? WHERE userid=?`,[prname,userid],(err,result)=>{
+      if(err){
+        console.err(err)
+        res.status(200).json({success:false})
+      }
+      else{
+        res.status(200).json({success:true})
+      }
+    })
+  })
