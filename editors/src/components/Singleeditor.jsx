@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import './Singleeditor.css'
 import { useParams } from 'react-router-dom'
 function Singleeditor() {
+   const {id}=useParams()
     const [editor,setEditor]=useState([])
     
-    const {id}=useParams()
     useEffect(()=>{
         fetch(`http://localhost:3000/editor/${id}`,{
             method:'GET',
@@ -19,7 +19,23 @@ function Singleeditor() {
             } 
         })
     },[id])
-
+    function handlecontact(){
+      let editorid=id;
+      let userid=localStorage.getItem('userid');
+      let message="you have to edit my video";
+      fetch('http://localhost:3000/reqcontact',{
+        method:'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:JSON.stringify({editorid:editorid,userid:userid,message:message})
+      }).then(res=>res.json()).then(data=>{
+        if(data.success){
+          alert('Requested Successfully');
+        }
+        else{
+          alert(data.message);
+        }
+      })
+    }
   return (
   <div className="editor-details-wrapper">
     {editor ? (
@@ -44,8 +60,7 @@ function Singleeditor() {
             <p><strong>Email:</strong> {editor.email}</p>
             <p><strong>Phone:</strong> {editor.phone}</p>
           </div>
-          <a
-            href={`mailto:${editor.email}?subject=Contacting you via Editor Platform`}
+          <a onClick={handlecontact}
             className="contact-editor-button"
           >
             Contact Editor

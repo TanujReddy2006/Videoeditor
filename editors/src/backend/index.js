@@ -2,8 +2,10 @@ const express=require('express');
 const mysql=require('mysql2');
 const cors=require('cors');
 const multer=require('multer')
+const nodemailer=require('nodemailer')
 const { use } = require('react');
 const path = require('path');
+const { console } = require('inspector');
 const app=express();
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(cors());
@@ -203,3 +205,79 @@ app.get('/alleditors', (req, res) => {
       }
     })
   })
+  app.post('/reqcontact', (req, res) => {
+  const { editorid, userid, message } = req.body;
+  db.query(`SELECT email FROM editors WHERE id = ?`, [editorid], (err, result) => {
+    if (err) {
+      console.error("DB Error:", err);
+      return res.status(500).json({ success: false, error: "Database error" });
+    }
+
+    if (result.length === 0) {
+      return res.status(404).json({ success: false, error: "Editor not found" });
+    }
+
+    const editoremail = result[0].email;
+
+    const acceptLink = `http://localhost:3000/response?status=accepted&userid=${userid}&editorid=${editorid}`;
+    const rejectLink = `http://localhost:3000/response?status=rejected&userid=${userid}&editorid=${editorid}`;
+
+    const htmlBody = `
+      <h3>Contact Request from User ID: ${userid}</h3>
+      <p>Message: ${message}</p>
+      <p>
+        <a href="${acceptLink}">✅ Accept</a> |
+        <a href="${rejectLink}">❌ Reject</a>
+      </p>
+    `;
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'vtanujreddy@gmail.com',
+        pass: 'qhujvtbdwrhwcncz', 
+      },
+    });
+    try{
+    transporter.sendMail({
+      from: 'vtanujreddy@gmail.com',
+      to: editoremail,
+      subject: 'User has requested you for editing',
+      html: htmlBody,
+    }, (error, info) => {
+      if (error) {
+        console.error("Email Error:", error);
+        return res.status(500).json({ success: false, error: "Failed to send email" });
+      }
+      db.query(`INSERT INTO requests(userid,editorid) VALUES(?,?) `,[userid,editorid],(err,result)=>{
+        if (err){
+          console.error(err)
+          return res.status(500).json({ success: false, error: "Failed to send email" });
+
+        }
+      })
+      res.status(200).json({ success: true, message: "Email sent" });
+    });}
+    catch(err){
+      console.error(err);
+      return res.status(500).json({ success: false, error: "Failed to send email" });
+    }
+  });
+  
+});
+app.get('/response', (req, res) => {
+  const { status, userid, editorid } = req.query;
+
+  db.query(
+    'UPDATE requests SET status = ? WHERE userid = ? AND editorid = ?',
+    [status, userid, editorid],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.send("Something went wrong.");
+      }
+
+      res.send(`<h2>You have ${status}ed the request from user ID ${userid}.</h2>`);
+    }
+  );
+});
